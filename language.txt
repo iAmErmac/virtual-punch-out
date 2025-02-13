@@ -1,0 +1,30 @@
+[enu default]
+
+PO_FIGHT 				= "Fight";
+PO_LOADSAVE 				= "Continue";
+PO_OPTIONS 				= "Rules";
+PO_QUIT 				= "Retire";
+
+PO_RANKS 				= "Punchout Ranks";
+PO_TRAIN 				= "Training (Deathmatch)";
+
+PO_RANKTEXT01 				= "Minor Circut:";
+PO_RANKTEXT02 				= "#2 Glass Joe W:1 L:99 KO:1 From: Paris France Age: 38";
+PO_RANKTEXT03 				= "#1 Von Kaiser W:23 L:13 KO:10 From: Berlin Germany Age: 42";
+PO_RANKTEXT04 				= "Champ Bald Bull W:34 L:4 KO:29 From: Istanbul Turkey Age: 46";
+PO_RANKTEXT05 				= "Major Circut:";
+PO_RANKTEXT06 				= "#5 Don Flamenco W:22 L:4 KO:9 From: Madrid Spain Age: 23";
+PO_RANKTEXT07 				= "#4 Gabby Jay W:2 L:100 KO:2 From: Paris France Age: 56";
+PO_RANKTEXT08 				= "#3 Great Tiger W:24 L:5 KO:3 From: Mumbai India Age: 29";
+PO_RANKTEXT09 				= "#2 King Hippo W:18 L:9 KO:18 From: Hippo Island Age: ??";
+PO_RANKTEXT10 				= "#1 Piston Hondo W:26 L:1 KO:18 From: Tokyo Japan Age: 28";
+PO_RANKTEXT11 				= "Champ Masked Muscle W:19 L:5 KO:15 From: Mexico City Mexico Age: 29";
+PO_RANKTEXT12 				= "World Circut:";
+PO_RANKTEXT13 				= "#6 Aran Ryan W:18 L:10 KO:16 From: Dublin Ireland Age: 23";
+PO_RANKTEXT14 				= "#5 Soda Popinski W:33 L:2 KO:24 From: Moscow Russia Age: 35";
+PO_RANKTEXT15 				= "#4 Rick Bruiser W:41 L:2 KO:41 From: Nashville Tennessee Age: ??";
+PO_RANKTEXT16 				= "#3 Mr. Sandman W:27 L:2 KO:21 From: Philadelphia Pennsylvania Age: 31";
+PO_RANKTEXT17 				= "#2 Mr. Dream W:49 L:0 KO:43 From: Brockton Massachusetts Age: ??";
+PO_RANKTEXT18 				= "#1 Super Macho Man W:35 L:0 KO:29 From: Hollywood California Age: 27";
+PO_RANKTEXT19 				= "---------CHAMPION OF THE WORLD-----------";
+PO_RANKTEXT20 				= "MIKE TYSON W:31 L:0 KO:27 From: Catskill NY Age: 21";

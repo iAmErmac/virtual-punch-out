@@ -1,0 +1,34 @@
+
+class POVRWeaponHandler : EventHandler
+{
+	override void WorldTick()
+	{
+		Playerinfo player = Players[consoleplayer];
+		if(!player) return;
+		
+		let pmo = player.mo;
+		
+		if(!pmo.countinv("VRBoxingFist")) pmo.giveInventory("VRBoxingFist", 1);
+		if(!pmo.countinv("VRBoxingOffhand")) pmo.giveInventory("VRBoxingOffhand", 1);
+		
+		if(!player.readyweapon)
+		{
+			let boxingFist = Weapon(pmo.findinventory("VRBoxingFist"));
+			player.readyweapon = boxingFist;
+			player.PendingWeapon = boxingFist;
+			pmo.BringUpWeapon();
+		}
+		
+		if(!player.offhandweapon)
+		{
+			let offhandFist = Weapon(pmo.findinventory("VRBoxingOffhand"));
+			player.offhandweapon = offhandFist;
+			player.PendingWeapon = offhandFist;
+			pmo.BringUpWeapon();
+		}
+		
+		//we don't need these fists. remove them
+		if(pmo.countinv("HighFist")) pmo.setinventory("HighFist", 0);
+		if(pmo.countinv("LowFist")) pmo.setinventory("LowFist", 0);
+	}
+}

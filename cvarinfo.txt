@@ -1,0 +1,2 @@
+
+user bool vmm_disable_melee = true;

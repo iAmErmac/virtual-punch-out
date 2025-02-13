@@ -1,0 +1,125 @@
+
+class VRBoxingFist : Weapon
+{
+	bool motionPunch;
+	
+	Default
+	{
+		Weapon.SelectionOrder 5500;
+		Weapon.Kickback 100;
+		Obituary "$OB_MPFIST";
+		Tag "$TAG_FIST";
+		+WEAPON.WIMPY_WEAPON
+		+WEAPON.MELEEWEAPON
+		+WEAPON.NOHANDSWITCH
+	}
+	
+	override void Tick()
+	{
+		if(!owner || owner.health < 2) return;
+		
+		// --- Api from oVRdrive mod (if loaded) ---
+		
+		string punchMotionClass1 = "vmMainhandPunch";
+		string punchMotionClass2 = "vmOffhandPunch";
+		class<Inventory> mainhandPunch = punchMotionClass1;
+		class<Inventory> offhandPunch = punchMotionClass2;
+			
+		// --- End api ---
+		
+		int hand = owner.player.ReadyWeapon is "VRBoxingFist" ? 0 : 1;
+		
+		//activate motion punching only if oVRdrive api is found
+		if(hand == 0 && mainhandPunch && owner.countinv(mainhandPunch))
+			motionPunch = true;
+		else if(hand == 1 && offhandPunch && owner.countinv(offhandPunch))
+			motionPunch = true;
+		else
+			motionPunch = false;
+		
+		//natural blocking
+		checkForBlockMode();
+	}
+	
+	action void A_ThrowPunch()
+	{
+		int laflags = LAF_ISMELEEATTACK;
+		int alflags = 0;
+		FTranslatedLineTarget t;
+
+		if (player != null)
+		{
+			Weapon weap = invoker == player.OffhandWeapon ? player.OffhandWeapon : player.ReadyWeapon;
+			if (weap != null && invoker == weap && stateinfo != null && stateinfo.mStateType == STATE_Psprite)
+			{
+				alflags |= weap.bOffhandWeapon ? ALF_ISOFFHAND : 0;
+				laflags |= weap.bOffhandWeapon ? LAF_ISOFFHAND : 0;
+			}
+		}
+
+		int damage = random[Punch](1, 10) << 1;
+
+		if (FindInventory("PowerStrength"))
+			damage *= 10;
+
+		double ang = angle + Random2[Punch]() * (5.625 / 256);
+		double range = MeleeRange + MELEEDELTA;
+		double pitch = AimLineAttack (ang, range, null, 0., ALF_CHECK3D | alflags);
+
+		LineAttack (ang, range, pitch, damage, 'Melee', "BulletPuff", laflags, t);
+	}
+	
+	protected void checkForBlockMode()
+	{
+		Playerinfo player = Players[consoleplayer];
+		let pmo = player.mo;
+		
+		vector3 cameraPos = (pmo.pos.xy, pmo.pos.z + player.viewheight);
+		vector3 mainhandPos = pmo.AttackPos;
+		vector3 offhandPos = pmo.OffhandPos;
+		
+		let dist1 = Level.Vec3Diff(mainhandPos, offhandPos).length();
+		let dist2 = Level.Vec3Diff(cameraPos, mainhandPos).length();
+		let dist3 = Level.Vec3Diff(cameraPos, offhandPos).length();
+		
+		if(dist1 < 7 && (dist2 < 7 || dist3 < 7))
+		{
+			//pmo.A_Print("Blocking...");
+			pmo.bShootable = false;
+		}
+		else
+			pmo.bShootable = true;
+		
+	}
+	
+	States
+	{
+	Ready:
+		TNT1 A 0 A_JumpIf(invoker.motionPunch, "Punch");
+		FIST A 1 A_WeaponReady;
+		Loop;
+	Deselect:
+		FIST A 1 A_Lower (120);
+		wait;
+	Select:
+		FIST A 1 A_Raise (120);
+		wait;
+	Fire:
+		FIST BCD 1;
+		FIST E 2 A_Punch;
+		FIST CDB 1;
+		Goto Ready;
+	Punch:
+		FIST A 8 A_ThrowPunch();
+		Goto Ready;
+	}
+}
+
+class VRBoxingOffhand : VRBoxingFist
+{
+	Default
+	{
+	+WEAPON.OFFHANDWEAPON;
+	+WEAPON.NOHANDSWITCH;
+	}
+}

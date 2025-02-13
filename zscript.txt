@@ -1,0 +1,4 @@
+version "3.0"
+
+#include "zscript/po_weapons.txt"
+#include "zscript/po_common.txt"

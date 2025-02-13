@@ -1,0 +1,64 @@
+DEFAULTLISTMENU
+{
+	Font "BigFont", "White"
+	Selector "M_SKULL1", -30, -6
+	Linespacing 16
+}
+
+LISTMENU "MainMenu"
+{
+	//Position 75, 75
+	centermenu
+	Position 75, 120
+	StaticPatch 94, 2, "M_DOOM"
+	TextItem "$PO_FIGHT", "f", "PlayerclassMenu"
+	TextItem "$PO_LOADSAVE", "c", "LoadGameMenu"
+	TextItem "$PO_OPTIONS", "r", "OptionsMenu"
+	TextItem "$PO_QUIT", "q", "QuitMenu"
+}
+
+OptionMenu PunchoutRanks
+{
+	Title 	"$PO_RANKS"
+	StaticText " "
+	StaticText "$PO_RANKTEXT01"
+	StaticText "$PO_RANKTEXT02"
+	StaticText "$PO_RANKTEXT03"
+	StaticText "$PO_RANKTEXT04"
+	StaticText " "
+	StaticText "$PO_RANKTEXT05"
+	StaticText "$PO_RANKTEXT06"
+	StaticText "$PO_RANKTEXT07"
+	StaticText "$PO_RANKTEXT08"
+	StaticText "$PO_RANKTEXT09"
+	StaticText "$PO_RANKTEXT10"
+	StaticText "$PO_RANKTEXT11"
+	StaticText " "
+	StaticText "$PO_RANKTEXT12"
+	StaticText "$PO_RANKTEXT13"
+	StaticText "$PO_RANKTEXT14"
+	StaticText "$PO_RANKTEXT15"
+	StaticText "$PO_RANKTEXT16"
+	StaticText "$PO_RANKTEXT17"
+	StaticText "$PO_RANKTEXT18"
+	StaticText " "
+	StaticText "$PO_RANKTEXT19"
+	StaticText "$PO_RANKTEXT20"
+}
+
+ListMenu "SkillMenu"
+{
+	Font "BigFont", "White"
+	StaticText 74, 16, "$MNU_CHOOSESKILL"
+	Position 160, 44
+	centermenu
+}
+
+ListMenu "EpisodeMenu"
+{
+	NetgameMessage "$NEWGAME"
+	Position 85, 63
+	StaticText 95, 38, "Choose Episode"
+	// items will be filled in by MAPINFO
+	centermenu
+}
